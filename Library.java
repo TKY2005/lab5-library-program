@@ -1,3 +1,13 @@
+/*
+ * name: Youssef Mohamed Torki Ahmed
+ * ID: 445820246
+ * lab5 code
+ */
+
+
+ // TODO: figure out where to add the genere field, ask about the generic used in the List and why it exists in the first place
+ // when you have a map that does the same job even better than the list.
+ // add a user interface.
 import java.util.*;
 
 public class Library {
@@ -21,5 +31,23 @@ public class Library {
         id = Integer.parseInt(idS);
         allBooks.add(book);
         storedBooks.put(id, book);
+    }
+
+    public void issueBook(int bookId){
+        Book chosenBook = storedBooks.get(bookId);
+        issued.add(chosenBook.getTitle());
+        chosenBook.isAvailable = false;
+    }
+
+    public void returnBook(int bookId){
+        Book chosenBook = allBooks.get(bookId);
+        issued.remove(chosenBook.getTitle());
+        chosenBook.isAvailable = true;
+    }
+
+    public void displayAllAvailableBooks(){
+        for(Map.Entry<Integer, Book> entry : storedBooks.entrySet()){
+            System.out.println(entry.getValue().toString());
+        }
     }
 }

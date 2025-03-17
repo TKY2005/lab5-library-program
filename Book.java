@@ -1,3 +1,10 @@
+/*
+ * name: Youssef Mohamed Torki Ahmed
+ * ID: 445820246
+ * lab5 code
+ */
+
+
 public class Book{
     private int bookId;
     private String title;
@@ -21,10 +28,12 @@ public class Book{
     
     public String toString(){
         String info = String.format("""
+            ============================================
                 Title: %s
                 ID: %d
                 Author name: %s
-                available: %s
+                is this book available: %s
+            ============================================
                 """, title, bookId, author, isAvailable);
         
         return info;
