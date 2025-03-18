@@ -11,42 +11,58 @@
 import java.util.*;
 
 public class Library {
-    public String[] generes = {"History", "Fiction", "Philosophy", "Science", "Novel", "Relegion", "Research"};
-    public List<Book> allBooks;
-    public Set<String> issued;
-    public Map<Integer, Book> storedBooks;
+    private String[] generes = {"History", "Fiction", "Philosophy", "Science", "Novel", "Relegion", "Research"};
+    private List<Book> allBooks;
+    private Set<String> issued;
+    private Map<Long, Book> storedBooks;
 
     public Library(){
         allBooks = new ArrayList<Book>();
         issued = new HashSet<String>();
-        storedBooks = new HashMap<Integer, Book>();
+        storedBooks = new HashMap<Long, Book>();
     }
 
     public void addBook(Book book){
-        String idS = new String();
-        int id;
+        String idS = "";
+        long id;
         for(int i = 0; i < 10; i++){
             idS += Integer.toString(new Random().nextInt(0, 9));
         }
-        id = Integer.parseInt(idS);
+        id = Long.parseLong(idS, 10);
+        book.setId(id);
         allBooks.add(book);
         storedBooks.put(id, book);
+        System.out.println("Book added successfully. new book id: " + id);
     }
 
-    public void issueBook(int bookId){
+    public void issueBook(long bookId){
         Book chosenBook = storedBooks.get(bookId);
-        issued.add(chosenBook.getTitle());
-        chosenBook.isAvailable = false;
+        if (!issued.contains(chosenBook.getTitle())){
+            issued.add(chosenBook.getTitle());
+            chosenBook.isAvailable = false;
+            System.out.printf("The book '%s' has been issued successfully.\n", chosenBook.getTitle());
+        }else{
+            System.out.println("This book seems to be either already issued or doesn't exist. please check availablity status in display menu");
+        }
     }
 
-    public void returnBook(int bookId){
-        Book chosenBook = allBooks.get(bookId);
-        issued.remove(chosenBook.getTitle());
-        chosenBook.isAvailable = true;
+    public void returnBook(long bookId){
+        Book chosenBook = storedBooks.get(bookId);
+        if (issued.contains(chosenBook.getTitle())){
+            issued.remove(chosenBook.getTitle());
+            chosenBook.isAvailable = true;
+            System.out.printf("The book '%s' has been return and marked as available.\n", chosenBook.getTitle());
+        }else{
+            System.out.println("This book seems to be already available. check availability status in display menu.");
+        }
+    }
+
+    public void searchBook(long id){
+        System.out.println(storedBooks.get(id).toString());
     }
 
     public void displayAllAvailableBooks(){
-        for(Map.Entry<Integer, Book> entry : storedBooks.entrySet()){
+        for(Map.Entry<Long, Book> entry : storedBooks.entrySet()){
             System.out.println(entry.getValue().toString());
         }
     }
