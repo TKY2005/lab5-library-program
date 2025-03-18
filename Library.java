@@ -11,7 +11,7 @@
 import java.util.*;
 
 public class Library {
-    private String[] generes = {"History", "Fiction", "Philosophy", "Science", "Novel", "Relegion", "Research"};
+    String[] generes = {"Undefined", "History", "Fiction", "Philosophy", "Science", "Novel", "Relegion", "Research"};
     private List<Book> allBooks;
     private Set<String> issued;
     private Map<Long, Book> storedBooks;
@@ -22,7 +22,7 @@ public class Library {
         storedBooks = new HashMap<Long, Book>();
     }
 
-    public void addBook(Book book){
+    public void addBook(Book book, int genereIndex){
         String idS = "";
         long id;
         for(int i = 0; i < 10; i++){
@@ -30,6 +30,7 @@ public class Library {
         }
         id = Long.parseLong(idS, 10);
         book.setId(id);
+        book.setGenere(generes[genereIndex - 1]);
         allBooks.add(book);
         storedBooks.put(id, book);
         System.out.println("Book added successfully. new book id: " + id);
@@ -57,8 +58,8 @@ public class Library {
         }
     }
 
-    public void searchBook(long id){
-        System.out.println(storedBooks.get(id).toString());
+    public Book searchBook(long id){
+        return storedBooks.get(id);
     }
 
     public void displayAllAvailableBooks(){
