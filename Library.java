@@ -4,10 +4,6 @@
  * lab5 code
  */
 
-
- // TODO: figure out where to add the genere field, ask about the generic used in the List and why it exists in the first place
- // when you have a map that does the same job even better than the list.
- // add a user interface.
 import java.util.*;
 
 public class Library {
