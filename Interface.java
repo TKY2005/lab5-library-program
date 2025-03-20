@@ -1,3 +1,10 @@
+/*
+ * name: Youssef Mohamed Torki Ahmed
+ * ID: 445820246
+ * lab5 code
+ */
+
+
 import java.util.Scanner;
 
 public class Interface {
